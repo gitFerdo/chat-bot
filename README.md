@@ -1,8 +1,9 @@
 ### Technology
 
+- OpenAI API for real-time chatbot
 - GPT 3.5 turbo
 - GPT 4
-- Node.js & Express for backend and create REST API
+- Node.js & Express for backend and create REST API with TypeScript
 - MongoDB for database
 - Vite for frontend
 - bcrypt for encrypt password
