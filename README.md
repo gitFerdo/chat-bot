@@ -1,5 +1,6 @@
 ### Technology
 
+- MERN Stack
 - OpenAI API for real-time chatbot
 - GPT 3.5 turbo
 - GPT 4
@@ -16,3 +17,5 @@
   - Context
   - Axios
   - Router
+
+run backend - npm run dev
