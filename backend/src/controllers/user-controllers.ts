@@ -32,7 +32,7 @@ export const userSignup = async (
     await user.save();
 
     return res
-      .status(200)
+      .status(201)
       .json({ message: "Successfully Registered", id: user._id.toString() });
   } catch (error) {
     console.log(error);
