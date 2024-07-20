@@ -19,4 +19,8 @@
   - Router
 - Morgan
 
+- request for user register
+  - encrypt password
+  - add validations using middleware
+
 run backend - npm run dev
