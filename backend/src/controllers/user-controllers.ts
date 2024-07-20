@@ -1,3 +1,17 @@
-export const getAllUsers = () => {
-  // get all users
+import { NextFunction, Request, Response } from "express";
+import User from "../modules/User.js";
+
+export const getAllUsers = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  try {
+    // Get all users
+    const users = await User.find()
+    return res.status(200).json({message: "Success", users})
+  } catch (error) {
+    console.log(error)
+    return res.status(400).json({message: "Error", cause: error.message})
+  }
 };
