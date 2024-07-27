@@ -26,5 +26,6 @@
   - add validations using middleware
 
 - Login function
+- Authentication Token
 
 run backend - npm run dev

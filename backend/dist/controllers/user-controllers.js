@@ -1,5 +1,6 @@
 import User from "../modules/User.js";
 import { compare, hash } from "bcrypt";
+import { createToken } from "../utils/token-manager.js";
 export const getAllUsers = async (req, res, next) => {
     try {
         // Get all users
@@ -42,6 +43,7 @@ export const userLogin = async (req, res, next) => {
         if (!isPasswordCorrect) {
             return res.status(403).send("Password incorrect");
         }
+        const token = createToken(user._id.toString(), user.email, "7d");
         return res
             .status(200)
             .json({ message: "Successfully Logged In", id: user._id.toString() });
