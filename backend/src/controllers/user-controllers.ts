@@ -1,6 +1,6 @@
 import { NextFunction, Request, Response } from "express";
 import User from "../modules/User.js";
-import { hash } from "bcrypt";
+import { compare, hash } from "bcrypt";
 
 export const getAllUsers = async (
   req: Request,
@@ -26,6 +26,9 @@ export const userSignup = async (
     // user sign up
     const { name, email, password } = req.body;
 
+    const existingUser = await User.findOne({email})
+    if(existingUser) return res.status(401).send("User already exists")
+
     const hashedPassword = await hash(password, 10);
 
     const user = new User({ name, email, password: hashedPassword });
@@ -34,6 +37,34 @@ export const userSignup = async (
     return res
       .status(201)
       .json({ message: "Successfully Registered", id: user._id.toString() });
+  } catch (error) {
+    console.log(error);
+    return res.status(400).json({ message: "Error", cause: error.message });
+  }
+};
+
+export const userLogin = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  try {
+    // user Login
+    const { email, password } = req.body;
+
+    const user = await User.findOne({email})
+    if(!user){
+      return res.status(401).send("User not found")
+    }
+
+    const isPasswordCorrect = await compare(password, user.password)
+    if(!isPasswordCorrect){
+      return res.status(403).send("Password incorrect")
+    }
+
+    return res
+       .status(200)
+       .json({ message: "Successfully Logged In", id: user._id.toString() });
   } catch (error) {
     console.log(error);
     return res.status(400).json({ message: "Error", cause: error.message });

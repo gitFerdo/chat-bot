@@ -14,12 +14,15 @@ export const validate = (validations) => {
         return res.status(422).json({ errors: errors.array() });
     };
 };
-export const signupValidator = [
-    body("name").notEmpty().withMessage("Please enter your name"),
+export const loginValidator = [
     body("email").trim().isEmail().withMessage("Please enter your email"),
     body("password")
         .trim()
         .isLength({ min: 6 })
         .withMessage("Please enter your password in 6 characters"),
+];
+export const signupValidator = [
+    body("name").notEmpty().withMessage("Please enter your name"),
+    ...loginValidator,
 ];
 //# sourceMappingURL=validators.js.map

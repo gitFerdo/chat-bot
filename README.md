@@ -19,8 +19,12 @@
   - Router
 - Morgan
 
+### Functions
+
 - request for user register
   - encrypt password
   - add validations using middleware
+
+- Login function
 
 run backend - npm run dev
