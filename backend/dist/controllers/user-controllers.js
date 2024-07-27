@@ -44,6 +44,15 @@ export const userLogin = async (req, res, next) => {
             return res.status(403).send("Password incorrect");
         }
         const token = createToken(user._id.toString(), user.email, "7d");
+        const expires = new Date();
+        expires.setDate(expires.getDate() + 7);
+        res.cookie("auth_token", token, {
+            path: "/",
+            domain: "localhost",
+            expires,
+            httpOnly: true,
+            signed: true
+        });
         return res
             .status(200)
             .json({ message: "Successfully Logged In", id: user._id.toString() });
